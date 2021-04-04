@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+  <main class="container mt-3">
+    <!-- HERO -->
+
+    <section class="jumbotron text-center mt-4" style="background: url('https://cdn.photosight.ru/img/5/509/5619878_xlarge.jpg'); background-position: center center">
+      <h1 class="display-4">Всякие туры</h1>
+      <p class="lead">Для тех, кого отвлекают дома</p>
+      <p class="mt-5 w-50 mx-auto">Лучшие направления,где никто не будет вам мешать сидеть на берегу и изучать программирование, дизайн, разработку игр и управление продуктами</p>
+    </section>
+    <!-- CARDS -->
+
+    <div class="row mt-5">
+
+      {% for id, tour in tours.items() %}
+        {% if id in otbor %}
+      <div class="col-4">
+        <div class="card mb-4">
+          <img src={{tour.picture}} class="card-img-top img-fluid" alt="">
+          <div class="card-body">
+            <h2 class="h5 card-title">{{tour.country}}: {{tour.title}} {{tour.stars | int *('★')}}</h2>
+            <p class="card-text">{{tour.description|truncate(100)}}</p>
+            <p class="h5 card-title">{{tour.date}}, {{tour.nights}} ночей, {{tour.price}} Р</p>
+            <a href="{{ url_for('tour' , tour_id=id, departure_name='ХЗ') }}" class="btn btn-sm btn-primary">Подробнее</a>
+          </div>
+        </div>
+      </div>
+        {% endif %}
+    {% endfor %}
+
+
+
+    </div>
+  </main>
+
+
+{% endblock %}
