@@ -18,12 +18,13 @@
         <ul class="navbar-nav">
 
     {% for departure_code, departure_name in departures.items() %}
+          {% if departure_code == departure %}
+                {% set active_class = "active" %}
+          {% else %}
+                {% set active_class = "" %}
+          {% endif %}
           <li class="nav-item">
-            {% if departure_code == departure %}
-            <a class="nav-link active" href="/departures/{{departure_code}}/">{{departure_name}}</a>
-            {% else %}
-            <a class="nav-link" href="/departures/{{departure_code}}/">{{departure_name}}</a>
-            {% endif %}
+            <a class="nav-link {{active_class}}" href="/departures/{{departure_code}}/">{{departure_name}}</a>
           </li>
     {% endfor %}
 
