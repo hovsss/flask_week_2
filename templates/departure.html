@@ -5,12 +5,11 @@
   <main class="container mt-3">
 
     <h1 class="display-5 mt-4">Летим {{departure_name}}</h1>
-    <p class="mb-4">Найдено 15 туров, от 26 000 до 84 600 и от 4 ночей до 15 ночей</p>
+    <p class="mb-4">Найдено {{tours_on_departure|length}} туров, от {{min_price}} Р до {{max_price}} Р, от {{min_nights}} до {{max_nights}} ночей</p>
     <!-- CARDS -->
     <div class="row mt-5">
 
-    {% for id, tour in tours.items() %}
-    {% if tour.departure == departure %}
+    {% for id, tour in tours_on_departure.items() %}
       <div class="col-4">
         <div class="card mb-4">
           <div class="embed-responsive embed-responsive-16by9">
@@ -20,11 +19,10 @@
             <h2 class="h5 card-title">{{tour.country}}: {{tour.title}} {{tour.stars | int *('★')}}</h2>
             <p class="card-text">{{tour.description|truncate(100)}}</p>
             <p class="h5 card-title">{{tour.date}}, {{tour.nights}} ночей, {{tour.price}} Р</p>
-            <a href="{{ url_for('tour' , tour_id=id, departure_name='ХЗ') }}" class="btn btn-sm btn-primary">Подробнее</a>
+            <a href="{{ url_for('tour' , tour_id=id) }}" class="btn btn-sm btn-primary">Подробнее</a>
           </div>
         </div>
       </div>
-    {% endif %}
     {% endfor %}
 
 
